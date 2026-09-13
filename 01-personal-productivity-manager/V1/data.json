@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "judul_tugas": "Menyiapkan presentasi mingguan tim",
+        "kategori_tugas": "Kerja",
+        "prioritas_tugas": "Tinggi",
+        "status_tugas": "Belum selesai"
+    },
+    {
+        "id": 2,
+        "judul_tugas": "Membeli bahan masakan untuk stok dapur",
+        "kategori_tugas": "Pribadi",
+        "prioritas_tugas": "Sedang",
+        "status_tugas": "Belum selesai"
+    },
+    {
+        "id": 3,
+        "judul_tugas": "Belajar dasar Python selama 1 jam",
+        "kategori_tugas": "Belajar",
+        "prioritas_tugas": "Rendah",
+        "status_tugas": "Belum selesai"
+    }
+]

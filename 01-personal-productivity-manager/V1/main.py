@@ -1,5 +1,20 @@
+import json
+
 daftar_tugas = []
 id_berikutnya = 1
+
+def simpan_data(data_tugas):
+    with open("01-personal-productivity-manager\V1\data.json", "w") as file:
+        json.dump(data_tugas, file, indent=4)
+
+def muat_data():
+    with open("01-personal-productivity-manager\V1\data.json", "r") as file:
+        isi_file = file.read()
+        if not isi_file:
+            data_tugas = []
+        else:
+            data_tugas = json.loads(isi_file)
+        return data_tugas
 
 def masukkan_id():
     while True:
@@ -99,6 +114,7 @@ def tambah_tugas():
     }
     id_berikutnya += 1
     daftar_tugas.append(tugas_baru)
+    simpan_data(daftar_tugas)
 
 def tampilkan_tugas():
     if daftar_tugas:
@@ -119,6 +135,7 @@ def hapus_tugas():
         for tugas in daftar_tugas:
             if target_id == tugas["id"]:
                 daftar_tugas.remove(tugas)
+                simpan_data(daftar_tugas)
                 tugas_ditemukan = True
                 print("\nTugas berhasil dihapus!")
                 break
@@ -373,6 +390,7 @@ def tandai_selesai():
         for tugas in daftar_tugas:
             if target_id == tugas["id"]:
                 tugas["status_tugas"] = "Selesai"
+                simpan_data(daftar_tugas)
                 print("\nTugas berhasil ditandai selesai!")
                 tugas_ditemukan = True
                 break
@@ -404,14 +422,17 @@ def edit_tugas():
                 if int(pilihan_edit) == 1:
                     judul_baru = masukkan_judul()
                     tugas["judul_tugas"] = judul_baru
+                    simpan_data(daftar_tugas)
                     print("\nTugas berhasil diedit!")
                 elif int(pilihan_edit) == 2:
                     kategori_baru = pilih_kategori()
                     tugas["kategori_tugas"] = kategori_baru
+                    simpan_data(daftar_tugas)
                     print("\nTugas berhasil diedit!")
                 elif int(pilihan_edit) == 3:
                     prioritas_baru = pilih_prioritas()
                     tugas["prioritas_tugas"] = prioritas_baru
+                    simpan_data(daftar_tugas)
                     print("\nTugas berhasil diedit!")
                 else:
                     print("\nError: Pilihan tidak tersedia!")
@@ -422,6 +443,13 @@ def edit_tugas():
             print("\nTugas dengan ID tersebut tidak ditemukan!")
             continue
         break
+
+daftar_tugas = muat_data()
+id_terbesar = 0
+for tugas in daftar_tugas:
+    if tugas["id"] > id_terbesar:
+        id_terbesar = tugas["id"]
+id_berikutnya = id_terbesar + 1
 
 while True:
     print("\n===== PERSONAL PRODUCTIVITY MANAGER =====")
